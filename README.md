@@ -11,3 +11,37 @@ Ban your Windows laptop keyboard with ONLY one click, significantly more elegant
   
    Because they won't do it for me, so I self-taught myself how to write the bat script, and upload it here, it's not perfect, but at least it is serviceable. And to make it looks better, I designed an icon myself , hoping someday I can make it a better one, maybe an small app, make it more user friendly and can be installed more elegantly. It's just a bat, so basicly you can put it anywhere.  
    Personally, I recommend you to put these files in a non-system disk， and just put the .ink file in the startup menu where the .ink files of your other softwares are.
+  
+---
+## Commendlines:
+  
+### Activating the default laptop keyboard  
+~~~
+sc config i8042prt start= demand  
+~~~
+  
+### Deactivating the default laptop keyboard
+~~~
+sc config i8042prt start= disabled
+~~~
+
+## HOWEVER
+### Microsoft decides it is a good idea that users must reboot to activate either of the commendlines mentioned above.
+In which case, you have to reboot, if you want to ban your default keyboard. Moreover, considering there is the possibility that some of you may accidentally activate the script, I added following code to confirm your choice.
+~~~
+echo Windows thinks it is needed to REBOOT to make such a small change !!! 
+echo THAT'S NOT COOL ,Microsoft !
+echo So are you willing to pay the price for deactivating/activating your default laptop keyboard for now ? [y/n]
+set /p choice=
+
+IF %choice% == y  (
+    echo Here we go!
+) ELSE (
+    IF %choice% == Y  (
+        echo Here we go!
+    ) ELSE (
+        echo Bye~ Hope those genius from Microsoft will fix this some day!
+        GOTO :EOF
+    )
+)
+~~~
